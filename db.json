@@ -1,0 +1,173 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Iron man"
+    },
+    {
+      "id": 2,
+      "title": "The Incredible Hulk"
+    },
+    {
+      "id": 3,
+      "title": "Iron Man 2"
+    },
+    {
+      "id": 4,
+      "title": "Thor"
+    },
+    {
+      "id": 5,
+      "title": "Captain America: The First Avenger"
+    },
+    {
+      "id": 6,
+      "title": "Marvel's The Avengers"
+    },
+    {
+      "id": 7,
+      "title": "Iron Man 3"
+    },
+    {
+      "id": 8,
+      "title": "Thor: The Dark World"
+    },
+    {
+      "id": 9,
+      "title": "Captain America: The Winter Soldier"
+    },
+    {
+      "id": 10,
+      "title": "Guardians of the Galaxy"
+    },
+    {
+      "id": 11,
+      "title": "Avengers: Age of Ultron"
+    },
+    {
+      "id": 12,
+      "title": "Ant-Man"
+    },
+    {
+      "id": 13,
+      "title": "Captain America: Civil War"
+    },
+    {
+      "id": 14,
+      "title": "Doctor Strange"
+    },
+    {
+      "id": 15,
+      "title": "Guardians of the Galaxy Vol. 2"
+    },
+    {
+      "id": 16,
+      "title": "Spider-Man: Homecoming"
+    },
+    {
+      "id": 17,
+      "title": "Thor: Ragnarok"
+    },
+    {
+      "id": 18,
+      "title": "Black Panther"
+    },
+    {
+      "id": 19,
+      "title": "Avengers: Infinity War"
+    },
+    {
+      "id": 20,
+      "title": "Ant-Man and the Wasp"
+    },
+    {
+      "id": 21,
+      "title": "Captain Marvel"
+    },
+    {
+      "id": 22,
+      "title": "Avengers: Endgame"
+    },
+    {
+      "id": 23,
+      "title": "Spider-Man: Far From Home"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "text": "Led by Downey's career-resurrecting performance as billionaire weapons peddler Tony Stark, it proves just as indispensable to the movie's giddy escapist appeal as the seamless CGI effects and eye-popping pyrotechnics.",
+      "author": "Craig Outhier",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "text": "Robert Downey Jr. gives a nicely sardonic performance as Tony Stark, a rich playboy and the brilliant heir to his father's weapons manufacturing dynasty.",
+      "author": "J. R. Jones",
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "text": "There are a few scenes in Iron Man that make you realize why we rely on giant studios and big budgets come the summer months.",
+      "author": "Laremy Legel",
+      "postId": 1
+    },
+    {
+      "id": 4,
+      "text": "A supremely confident, well-tooled entertainment. It's bound to be the early pace-maker for the oncoming glut of summer blockbusters.",
+      "author": "Tom Charity",
+      "postId": 1
+    },
+    {
+      "id": 5,
+      "text": "Downey is at his charismatic best, rendering believable Stark's transformation from self-indulgent jerk to socially conscious crusader.",
+      "author": "Calvin Wilson",
+      "postId": 1
+    },
+    {
+      "id": 6,
+      "text": "If every superhero franchise had a Robert Downey Jr., the genre might actually be watchable again.",
+      "author": "Bob Mondello",
+      "postId": 1
+    },
+    {
+      "id": 7,
+      "text": "Few of the films in the (MCU) are as accessible as this one, and while you may not love it in your top-ten films of all-time, you can't beat the good time this film brings.",
+      "author": "Colby Bryant",
+      "postId": 1
+    },
+    {
+      "id": 8,
+      "text": "Iron Man is of such caliber that it makes the other films from the Marvel canon seem lesser by comparison.",
+      "author": "Zaki Hasan",
+      "postId": 1
+    },
+    {
+      "id": 9,
+      "text": "Robert Downey Jr. is the clown prince of stars, a role he was born to play after allowing us to watch his candid Hollywood revels for years and years and years.",
+      "author": "Eileen Jones",
+      "postId": 1
+    },
+    {
+      "id": 10,
+      "text": "Still, if the film is ultimately disappointing it is in part because it begins so well, and there is a lot to enjoy before the over-the-top final act.",
+      "author": "Karl French",
+      "postId": 1
+    },
+    {
+      "id": 11,
+      "text": "The movie that proved it's possible to make GOOD superhero movies, ushering in the MCU and teaching DC absolutely nothing",
+      "author": "Leona Laurie",
+      "postId": 1
+    },
+    {
+      "id": 12,
+      "text": "It's perhaps the most thrilling tribute to good old American ingenuity the movies have given us in ages.",
+      "author": "Marcianne Miller",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

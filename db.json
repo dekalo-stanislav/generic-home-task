@@ -96,74 +96,73 @@
   "comments": [
     {
       "id": 1,
-      "text": "Led by Downey's career-resurrecting performance as billionaire weapons peddler Tony Stark, it proves just as indispensable to the movie's giddy escapist appeal as the seamless CGI effects and eye-popping pyrotechnics.",
+      "content": "Led by Downey's career-resurrecting performance as billionaire weapons peddler Tony Stark, it proves just as indispensable to the movie's giddy escapist appeal as the seamless CGI effects and eye-popping pyrotechnics.",
       "author": "Craig Outhier",
       "postId": 1
     },
     {
       "id": 2,
-      "text": "Robert Downey Jr. gives a nicely sardonic performance as Tony Stark, a rich playboy and the brilliant heir to his father's weapons manufacturing dynasty.",
+      "content": "Robert Downey Jr. gives a nicely sardonic performance as Tony Stark, a rich playboy and the brilliant heir to his father's weapons manufacturing dynasty.",
       "author": "J. R. Jones",
       "postId": 1
     },
     {
       "id": 3,
-      "text": "There are a few scenes in Iron Man that make you realize why we rely on giant studios and big budgets come the summer months.",
+      "content": "There are a few scenes in Iron Man that make you realize why we rely on giant studios and big budgets come the summer months.",
       "author": "Laremy Legel",
       "postId": 1
     },
     {
       "id": 4,
-      "text": "A supremely confident, well-tooled entertainment. It's bound to be the early pace-maker for the oncoming glut of summer blockbusters.",
+      "content": "A supremely confident, well-tooled entertainment. It's bound to be the early pace-maker for the oncoming glut of summer blockbusters.",
       "author": "Tom Charity",
       "postId": 1
     },
     {
       "id": 5,
-      "text": "Downey is at his charismatic best, rendering believable Stark's transformation from self-indulgent jerk to socially conscious crusader.",
+      "content": "Downey is at his charismatic best, rendering believable Stark's transformation from self-indulgent jerk to socially conscious crusader.",
       "author": "Calvin Wilson",
       "postId": 1
     },
     {
       "id": 6,
-      "text": "If every superhero franchise had a Robert Downey Jr., the genre might actually be watchable again.",
+      "content": "If every superhero franchise had a Robert Downey Jr., the genre might actually be watchable again.",
       "author": "Bob Mondello",
       "postId": 1
     },
     {
       "id": 7,
-      "text": "Few of the films in the (MCU) are as accessible as this one, and while you may not love it in your top-ten films of all-time, you can't beat the good time this film brings.",
+      "content": "Few of the films in the (MCU) are as accessible as this one, and while you may not love it in your top-ten films of all-time, you can't beat the good time this film brings.",
       "author": "Colby Bryant",
       "postId": 1
     },
     {
       "id": 8,
-      "text": "Iron Man is of such caliber that it makes the other films from the Marvel canon seem lesser by comparison.",
+      "content": "Iron Man is of such caliber that it makes the other films from the Marvel canon seem lesser by comparison.",
       "author": "Zaki Hasan",
       "postId": 1
     },
     {
       "id": 9,
-      "text": "Robert Downey Jr. is the clown prince of stars, a role he was born to play after allowing us to watch his candid Hollywood revels for years and years and years.",
+      "content": "Robert Downey Jr. is the clown prince of stars, a role he was born to play after allowing us to watch his candid Hollywood revels for years and years and years.",
       "author": "Eileen Jones",
       "postId": 1
     },
     {
       "id": 10,
-      "text": "Still, if the film is ultimately disappointing it is in part because it begins so well, and there is a lot to enjoy before the over-the-top final act.",
+      "content": "Still, if the film is ultimately disappointing it is in part because it begins so well, and there is a lot to enjoy before the over-the-top final act.",
       "author": "Karl French",
       "postId": 1
     },
     {
       "id": 11,
-      "text": "The movie that proved it's possible to make GOOD superhero movies, ushering in the MCU and teaching DC absolutely nothing",
+      "content": "The movie that proved it's possible to make GOOD superhero movies, ushering in the MCU and teaching DC absolutely nothing",
       "author": "Leona Laurie",
       "postId": 1
     },
     {
       "id": 12,
-      "text": "It's perhaps the most thrilling tribute to good old American ingenuity the movies have given us in ages.",
-      "author": "Marcianne Miller",
+      "author"  : "Marcianne Miller",
       "postId": 1
     }
   ],

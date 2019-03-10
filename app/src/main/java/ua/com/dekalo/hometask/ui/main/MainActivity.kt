@@ -3,15 +3,17 @@ package ua.com.dekalo.hometask.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.model.DataModel
+import ua.com.dekalo.hometask.models.DataModel
+import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.details.DetailsActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainActivityViewModel = MainActivityViewModel() // TODO refactor to DI
+    private lateinit var viewModel: MainActivityViewModel
 
     private val adapter = MainActivityAdapter { _, item -> onItemClick(item) }
 
@@ -19,8 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initRecycler();
+        initRecycler()
 
+        // TODO different model injection
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         viewModel.data.observe(this, Observer { onDataUpdated(it) })
         viewModel.loadData()
     }
@@ -32,10 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDataUpdated(dataModel: DataModel) {
-        adapter.updateContent(dataModel.items)
+        adapter.updateContent(dataModel.posts)
     }
 
-    private fun onItemClick(item: String) {
-        startActivity(DetailsActivity.create(this, item))
+    private fun onItemClick(post: Post) {
+        startActivity(DetailsActivity.create(this, post))
     }
 }

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
+import ua.com.dekalo.hometask.models.Post
 
 class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -22,16 +23,16 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
         }
     }
 
-    fun bind(data: String, onClick: () -> Unit) {
-        itemView.findViewById<TextView>(R.id.text_view).text = data
+    fun bind(post: Post, onClick: () -> Unit) {
+        itemView.findViewById<TextView>(R.id.text_view).text = post.title
         itemView.setOnClickListener { onClick() }
     }
 }
 
-class MainActivityAdapter(private val onItemClick: (Int, String) -> Unit) :
+class MainActivityAdapter(private val onItemClick: (Int, Post) -> Unit) :
     RecyclerView.Adapter<MainActivityAdapterItemViewHolder>() {
 
-    private var items = listOf<String>()
+    private var items = listOf<Post>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainActivityAdapterItemViewHolder {
         return MainActivityAdapterItemViewHolder.create(parent)
@@ -43,12 +44,12 @@ class MainActivityAdapter(private val onItemClick: (Int, String) -> Unit) :
         holder.bind(items.get(position)) { onItemClick(position, items[position]) }
     }
 
-    fun updateContent(newItems: List<String>) {
+    fun updateContent(newItems: List<Post>) {
         val oldItems = items
         items = newItems
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == newItems[newItemPosition]
+                return oldItems[oldItemPosition].id == newItems[newItemPosition].id
             }
 
             override fun getOldListSize() = oldItems.size

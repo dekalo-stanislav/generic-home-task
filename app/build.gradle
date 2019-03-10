@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -12,7 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_ENDPOINT", "\"http://my-json-server.typicode.com/dekalo-stanislav/generic-home-task/\""
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,17 +33,39 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // rx java
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // serialization
+    implementation("com.squareup.moshi:moshi:1.8.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+
+    // networking
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+
+    // di
+    implementation 'com.google.dagger:dagger:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.16'
+    implementation 'com.google.dagger:dagger-android:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.16'
+    kapt 'com.google.dagger:dagger-android-processor:2.16'
+
+    // androidX
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'androidx.core:core-ktx:1.1.0-alpha04'
-
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
+    // assertions
     implementation 'com.heershingenmosiken:assertions-android:1.1.0'
 
-
+    // test
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.test:runner:1.1.1'

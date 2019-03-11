@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
@@ -27,7 +26,16 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
     fun bind(post: Post, onClick: () -> Unit) {
         itemView.findViewById<TextView>(R.id.post_title_text_view).text = post.title
         itemView.findViewById<TextView>(R.id.post_author_text_view).text = post.author
-        itemView.setOnClickListener { onClick() }
+
+        if (post.commentsCount > 0) {
+            itemView.findViewById<TextView>(R.id.post_comments_count_text_view).text =
+                itemView.context.getString(R.string.main_screen_comments_count, post.commentsCount)
+            itemView.setOnClickListener { onClick() }
+        } else {
+            itemView.findViewById<TextView>(R.id.post_comments_count_text_view).text =
+                itemView.context.getString(R.string.main_screen_no_comments)
+            itemView.setOnClickListener(null)
+        }
     }
 }
 

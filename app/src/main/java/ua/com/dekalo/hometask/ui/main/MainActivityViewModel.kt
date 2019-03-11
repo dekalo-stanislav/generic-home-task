@@ -17,15 +17,19 @@ class MainActivityViewModel @Inject constructor(private val postsRepository: Pos
     private val _data = MutableLiveData<DataModel>()
     val data: LiveData<DataModel> get() = _data
 
-    fun loadData() {
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    fun loadData(allowCache: Boolean = true) {
         compositeDisposable.add(
-            postsRepository.load(GenericRepository.createGenericSpec())
+            postsRepository.load(GenericRepository.createGenericSpec(allowCache = allowCache))
+                .doOnSubscribe { _isLoading.postValue(true) }
                 .subscribeOn(Schedulers.io())
+                .doAfterTerminate { _isLoading.postValue(false) }
                 .subscribe(
                     { _data.postValue(DataModel(it)) },
                     { TODO("Add error handling here") })
         )
-        _data.postValue(DataModel(listOf()))
     }
 
     override fun onCleared() {

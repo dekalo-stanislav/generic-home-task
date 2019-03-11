@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
@@ -32,6 +33,9 @@ class DetailsActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    private lateinit var viewModel: DetailsActivityViewModel
+    private lateinit var swipeToRefresh: SwipeRefreshLayout
+
     private var state: State? = null
     private val detailsAdapter = DetailsAdapter()
 
@@ -51,8 +55,9 @@ class DetailsActivity : AppCompatActivity() {
         state?.let {
             initUi()
 
-            val viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsActivityViewModel::class.java)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsActivityViewModel::class.java)
             viewModel.detailsContent.observe(this, Observer { detailsAdapter.updateItems(it) })
+            viewModel.isLoading.observe(this, Observer { if (!it) swipeToRefresh.isRefreshing = false })
             viewModel.init(it.post)
         } ?: Assertions.fail { IllegalStateException("state == null") }
     }
@@ -61,6 +66,9 @@ class DetailsActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.details_screen_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = detailsAdapter
+
+        swipeToRefresh = findViewById(R.id.swipe_to_refresh)
+        swipeToRefresh.setOnRefreshListener { viewModel.load(false) }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

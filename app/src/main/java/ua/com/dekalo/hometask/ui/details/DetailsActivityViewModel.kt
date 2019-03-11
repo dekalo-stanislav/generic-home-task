@@ -19,8 +19,12 @@ open class DetailsActivityViewModel @Inject constructor(private val commentsRepo
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
+
     private val _detailsContent = MutableLiveData<List<DetailsItem>>()
     val detailsContent: LiveData<List<DetailsItem>> get() = _detailsContent
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     private var post: Post? = null
     private var comments = listOf<Comment>()
@@ -28,18 +32,26 @@ open class DetailsActivityViewModel @Inject constructor(private val commentsRepo
     fun init(post: Post) {
         this.post = post
         mergeContentAndNotify()
+        load()
+    }
 
-        compositeDisposable.add(
-            commentsRepository
-                .load(CommentsRepository.createCommentsSpec(post.id))
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    comments = it
-                    mergeContentAndNotify()
-                }, {
-                    Assertions.fail { IllegalStateException("TODO error handling", it) }
-                })
-        )
+    fun load(allowCache: Boolean = true) {
+        post?.let { post ->
+            compositeDisposable.add(
+                commentsRepository
+                    .load(CommentsRepository.createCommentsSpec(post.id))
+                    .doOnSubscribe { _isLoading.postValue(true) }
+                    .subscribeOn(Schedulers.io())
+                    .doAfterTerminate { _isLoading.postValue(false) }
+                    .subscribe({
+                        comments = it
+                        mergeContentAndNotify()
+                    }, {
+                        Assertions.fail { IllegalStateException("TODO error handling", it) }
+                    })
+            )
+        } ?: Assertions.fail { java.lang.IllegalStateException("Post is null") }
+
     }
 
     private fun mergeContentAndNotify() {

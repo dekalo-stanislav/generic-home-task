@@ -2,95 +2,118 @@
   "posts": [
     {
       "id": 1,
-      "title": "Iron man"
+      "title": "Iron man",
+      "author": "Stan Lee"
     },
     {
       "id": 2,
-      "title": "The Incredible Hulk"
+      "title": "The Incredible Hulk",
+      "author": "Stan Lee"
     },
     {
       "id": 3,
-      "title": "Iron Man 2"
+      "title": "Iron Man 2",
+      "author": "Stan Lee"
     },
     {
       "id": 4,
-      "title": "Thor"
+      "title": "Thor",
+      "author": "Stan Lee"
     },
     {
       "id": 5,
-      "title": "Captain America: The First Avenger"
+      "title": "Captain America: The First Avenger",
+      "author": "Stan Lee"
     },
     {
       "id": 6,
-      "title": "Marvel's The Avengers"
+      "title": "Marvel's The Avengers",
+      "author": "Stan Lee"
     },
     {
       "id": 7,
-      "title": "Iron Man 3"
+      "title": "Iron Man 3",
+      "author": "Stan Lee"
     },
     {
       "id": 8,
-      "title": "Thor: The Dark World"
+      "title": "Thor: The Dark World",
+      "author": "Stan Lee"
     },
     {
       "id": 9,
-      "title": "Captain America: The Winter Soldier"
+      "title": "Captain America: The Winter Soldier",
+      "author": "Stan Lee"
     },
     {
       "id": 10,
-      "title": "Guardians of the Galaxy"
+      "title": "Guardians of the Galaxy",
+      "author": "Stan Lee"
     },
     {
       "id": 11,
-      "title": "Avengers: Age of Ultron"
+      "title": "Avengers: Age of Ultron",
+      "author": "Stan Lee"
     },
     {
       "id": 12,
-      "title": "Ant-Man"
+      "title": "Ant-Man",
+      "author": "Stan Lee"
     },
     {
       "id": 13,
-      "title": "Captain America: Civil War"
+      "title": "Captain America: Civil War",
+      "author": "Stan Lee"
     },
     {
       "id": 14,
-      "title": "Doctor Strange"
+      "title": "Doctor Strange",
+      "author": "Stan Lee"
     },
     {
       "id": 15,
-      "title": "Guardians of the Galaxy Vol. 2"
+      "title": "Guardians of the Galaxy Vol. 2",
+      "author": "Stan Lee"
     },
     {
       "id": 16,
-      "title": "Spider-Man: Homecoming"
+      "title": "Spider-Man: Homecoming",
+      "author": "Stan Lee"
     },
     {
       "id": 17,
-      "title": "Thor: Ragnarok"
+      "title": "Thor: Ragnarok",
+      "author": "Stan Lee"
     },
     {
       "id": 18,
-      "title": "Black Panther"
+      "title": "Black Panther",
+      "author": "Stan Lee"
     },
     {
       "id": 19,
-      "title": "Avengers: Infinity War"
+      "title": "Avengers: Infinity War",
+      "author": "Stan Lee"
     },
     {
       "id": 20,
-      "title": "Ant-Man and the Wasp"
+      "title": "Ant-Man and the Wasp",
+      "author": "Stan Lee"
     },
     {
       "id": 21,
-      "title": "Captain Marvel"
+      "title": "Captain Marvel",
+      "author": "Stan Lee"
     },
     {
       "id": 22,
-      "title": "Avengers: Endgame"
+      "title": "Avengers: Endgame",
+      "author": "Stan Lee"
     },
     {
       "id": 23,
-      "title": "Spider-Man: Far From Home"
+      "title": "Spider-Man: Far From Home",
+      "author": "Stan Lee"
     }
   ],
   "comments": [

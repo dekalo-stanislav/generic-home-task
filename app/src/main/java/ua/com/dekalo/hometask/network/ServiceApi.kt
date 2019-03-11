@@ -6,7 +6,7 @@ import retrofit2.http.Path
 import ua.com.dekalo.hometask.models.Comment
 import ua.com.dekalo.hometask.models.Post
 
-interface PostsApi {
+interface ServiceApi {
 
     @GET("posts")
     fun getPosts(): Single<List<Post>>

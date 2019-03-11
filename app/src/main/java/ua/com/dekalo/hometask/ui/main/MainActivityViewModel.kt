@@ -15,16 +15,12 @@ class MainActivityViewModel : ViewModel() {
 
     // TODO injectionthrough constructor
     @Inject
-    lateinit var postsRepository: PostsRepository
+    var postsRepository: PostsRepository = DaggerMainActivityComponent.builder().build().getPostsRepository()
 
     private val compositeDisposable = CompositeDisposable()
 
     private val _data = MutableLiveData<DataModel>()
     val data: LiveData<DataModel> get() = _data
-
-    init {
-        postsRepository = DaggerMainActivityComponent.builder().build().getPostsApi()
-    }
 
     fun loadData() {
         compositeDisposable.add(

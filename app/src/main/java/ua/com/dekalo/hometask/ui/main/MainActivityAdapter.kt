@@ -24,7 +24,8 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
     }
 
     fun bind(post: Post, onClick: () -> Unit) {
-        itemView.findViewById<TextView>(R.id.text_view).text = post.title
+        itemView.findViewById<TextView>(R.id.post_title_text_view).text = post.title
+        itemView.findViewById<TextView>(R.id.post_author_text_view).text = post.author
         itemView.setOnClickListener { onClick() }
     }
 }

@@ -3,13 +3,15 @@ package ua.com.dekalo.hometask.ui.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import java.io.Serializable
-import java.lang.IllegalStateException
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -24,7 +26,10 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var viewModel: DetailsActivityViewModel
+
     private var state: State? = null
+    private val detailsAdapter = DetailsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,15 +38,19 @@ class DetailsActivity : AppCompatActivity() {
         state = savedInstanceState?.let { savedInstanceState.getSerializable(STATE_KEY) } as State?
             ?: intent.getSerializableExtra(STATE_KEY) as State?
 
-        state?.let { initUi(it) }
+        state?.let {
+            initUi()
 
-        if (state == null) {
-            Assertions.fail { IllegalStateException("state == null") }
-        }
+            viewModel = ViewModelProviders.of(this).get(DetailsActivityViewModel::class.java)
+            viewModel.detailsContent.observe(this, Observer { detailsAdapter.updateItems(it) })
+            viewModel.init(it.post)
+        } ?: Assertions.fail { IllegalStateException("state == null") }
     }
 
-    private fun initUi(state: State) {
-        findViewById<TextView>(R.id.details_title_text_view).text = state.post.title
+    private fun initUi() {
+        val recyclerView = findViewById<RecyclerView>(R.id.details_screen_recycler)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = detailsAdapter
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

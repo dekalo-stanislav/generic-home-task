@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class Post(
     val id: Long,
-    val title: String
+    val title: String,
+    val author: String
 ) : Serializable

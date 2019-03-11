@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.ui.ViewModelFactory
 import java.io.Serializable
 
 class DetailsActivity : AppCompatActivity() {
@@ -26,13 +27,16 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModel: DetailsActivityViewModel
+    private lateinit var viewModelFactory: ViewModelFactory
 
     private var state: State? = null
     private val detailsAdapter = DetailsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        DaggerDetailsActivityComponent.create().inject(this)
+
         setContentView(R.layout.activity_details)
 
         state = savedInstanceState?.let { savedInstanceState.getSerializable(STATE_KEY) } as State?
@@ -41,7 +45,7 @@ class DetailsActivity : AppCompatActivity() {
         state?.let {
             initUi()
 
-            viewModel = ViewModelProviders.of(this).get(DetailsActivityViewModel::class.java)
+            val viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsActivityViewModel::class.java)
             viewModel.detailsContent.observe(this, Observer { detailsAdapter.updateItems(it) })
             viewModel.init(it.post)
         } ?: Assertions.fail { IllegalStateException("state == null") }

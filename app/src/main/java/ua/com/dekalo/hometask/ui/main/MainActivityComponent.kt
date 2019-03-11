@@ -5,7 +5,8 @@ import ua.com.dekalo.hometask.domain.DomainModule
 import ua.com.dekalo.hometask.domain.PostsRepository
 import ua.com.dekalo.hometask.network.NetworkModule
 
-@Component(modules = [NetworkModule::class, DomainModule::class])
+@Component(modules = [NetworkModule::class, DomainModule::class, MainActivityViewModelModule::class])
 interface MainActivityComponent {
-    fun getPostsRepository(): PostsRepository
+
+    fun inject(activity: MainActivity)
 }

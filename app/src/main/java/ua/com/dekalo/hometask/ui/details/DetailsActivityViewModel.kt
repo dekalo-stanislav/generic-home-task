@@ -9,21 +9,18 @@ import io.reactivex.schedulers.Schedulers
 import ua.com.dekalo.hometask.domain.CommentsRepository
 import ua.com.dekalo.hometask.models.Comment
 import ua.com.dekalo.hometask.models.Post
-import java.lang.IllegalStateException
+import javax.inject.Inject
 
 sealed class DetailsItem
 data class PostDetailsItem(val post: Post) : DetailsItem()
 data class CommentDetailsItem(val comment: Comment) : DetailsItem()
 
-open class DetailsActivityViewModel : ViewModel() {
+open class DetailsActivityViewModel @Inject constructor(private val commentsRepository: CommentsRepository) :
+    ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     private val _detailsContent = MutableLiveData<List<DetailsItem>>()
     val detailsContent: LiveData<List<DetailsItem>> get() = _detailsContent
-
-    // TODO injectionthrough constructor
-    private val commentsRepository: CommentsRepository =
-        DaggerDetailsActivityComponent.builder().build().getCommentsRepository()
 
     private var post: Post? = null
     private var comments = listOf<Comment>()
@@ -40,7 +37,7 @@ open class DetailsActivityViewModel : ViewModel() {
                     comments = it
                     mergeContentAndNotify()
                 }, {
-                    Assertions.fail { IllegalStateException("error", it) }
+                    Assertions.fail { IllegalStateException("TODO error handling", it) }
                 })
         )
     }

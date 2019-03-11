@@ -7,5 +7,5 @@ import ua.com.dekalo.hometask.network.NetworkModule
 
 @Component(modules = [NetworkModule::class, DomainModule::class])
 interface DetailsActivityComponent {
-    fun getCommentsRepository(): CommentsRepository
+    fun inject(activity: DetailsActivity)
 }

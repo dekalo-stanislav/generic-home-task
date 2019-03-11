@@ -3,19 +3,13 @@ package ua.com.dekalo.hometask.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
 import ua.com.dekalo.hometask.domain.PostsRepository
 import ua.com.dekalo.hometask.models.DataModel
 import javax.inject.Inject
 
-class MainActivityViewModel : ViewModel() {
-
-    // TODO injectionthrough constructor
-    @Inject
-    var postsRepository: PostsRepository = DaggerMainActivityComponent.builder().build().getPostsRepository()
+class MainActivityViewModel @Inject constructor(private val postsRepository: PostsRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 

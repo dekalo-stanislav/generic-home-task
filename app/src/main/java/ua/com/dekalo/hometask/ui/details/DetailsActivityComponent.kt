@@ -1,11 +1,11 @@
 package ua.com.dekalo.hometask.ui.details
 
 import dagger.Component
-import ua.com.dekalo.hometask.domain.CommentsRepository
-import ua.com.dekalo.hometask.domain.DomainModule
-import ua.com.dekalo.hometask.network.NetworkModule
+import ua.com.dekalo.hometask.AppComponent
+import ua.com.dekalo.hometask.ui.PerActivity
 
-@Component(modules = [NetworkModule::class, DomainModule::class, DetailsActivityViewModelModule::class])
+@PerActivity
+@Component(modules = [DetailsActivityViewModelModule::class], dependencies = [AppComponent::class])
 interface DetailsActivityComponent {
     fun inject(activity: DetailsActivity)
 }

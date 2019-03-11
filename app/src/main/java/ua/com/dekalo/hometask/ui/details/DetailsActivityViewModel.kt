@@ -31,7 +31,7 @@ open class DetailsActivityViewModel @Inject constructor(private val commentsRepo
 
         compositeDisposable.add(
             commentsRepository
-                .load(CommentsRepository.createLoadingParams(post.id))
+                .load(CommentsRepository.createCommentsSpec(post.id))
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     comments = it

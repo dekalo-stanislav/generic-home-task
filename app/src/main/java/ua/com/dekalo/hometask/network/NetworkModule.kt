@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ua.com.dekalo.hometask.BuildConfig
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -21,6 +22,7 @@ class NetworkModule {
         }
     }
 
+    @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {
 
@@ -33,6 +35,7 @@ class NetworkModule {
         }
     }
 
+    @Singleton
     @Provides
     fun providePostsApi(client: OkHttpClient): ServiceApi {
         return Retrofit.Builder()

@@ -1,21 +1,19 @@
 package ua.com.dekalo.hometask.domain
 
-import io.reactivex.Observable
 import ua.com.dekalo.hometask.models.Comment
 
-data class CommentsLoadingParams(val postId: Long, val allowCache: Boolean = true, val loadFresh: Boolean = true)
+class CommentsSpec(val postId: Long, allowCache: Boolean = true, loadFresh: Boolean = true) :
+    GenericSpec(allowCache, loadFresh)
 
-interface CommentsRepository {
+interface CommentsRepository : GenericRepository<List<Comment>, CommentsSpec> {
 
     companion object {
-        fun createLoadingParams(
+        fun createCommentsSpec(
             postId: Long,
             allowCache: Boolean = true,
             loadFresh: Boolean = true
-        ): CommentsLoadingParams {
-            return CommentsLoadingParams(postId, allowCache, loadFresh)
+        ): CommentsSpec {
+            return CommentsSpec(postId, allowCache, loadFresh)
         }
     }
-
-    fun load(commentsLoadingParams: CommentsLoadingParams): Observable<List<Comment>>
 }

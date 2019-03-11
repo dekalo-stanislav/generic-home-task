@@ -11,6 +11,9 @@ class HomeTaskApplication : Application() {
         private const val LOG_TAG = "HomeTaskApplication"
     }
 
+    private val _appComponent = DaggerAppComponent.create()
+    val appComponent: AppComponent get() = _appComponent
+
     override fun onCreate() {
 
         super.onCreate()

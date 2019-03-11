@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
+import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.ViewModelFactory
@@ -37,7 +38,10 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DaggerDetailsActivityComponent.create().inject(this)
+        DaggerDetailsActivityComponent.builder()
+            .appComponent((application as HomeTaskApplication).appComponent)
+            .build()
+            .inject(this)
 
         setContentView(R.layout.activity_details)
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import ua.com.dekalo.hometask.domain.GenericRepository
 import ua.com.dekalo.hometask.domain.PostsRepository
 import ua.com.dekalo.hometask.models.DataModel
 import javax.inject.Inject
@@ -18,7 +19,7 @@ class MainActivityViewModel @Inject constructor(private val postsRepository: Pos
 
     fun loadData() {
         compositeDisposable.add(
-            postsRepository.loadPosts()
+            postsRepository.load(GenericRepository.createGenericSpec())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { _data.postValue(DataModel(it)) },

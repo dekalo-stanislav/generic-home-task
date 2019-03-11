@@ -11,6 +11,6 @@ interface ServiceApi {
     @GET("posts")
     fun getPosts(): Single<List<Post>>
 
-    @GET("comments/{postId}/comments")
+    @GET("posts/{postId}/comments")
     fun getComments(@Path("postId") postId: Long): Single<List<Comment>>
 }

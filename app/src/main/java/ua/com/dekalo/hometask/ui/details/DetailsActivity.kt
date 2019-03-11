@@ -13,6 +13,7 @@ import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.ViewModelFactory
 import java.io.Serializable
+import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -27,7 +28,8 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private var state: State? = null
     private val detailsAdapter = DetailsAdapter()

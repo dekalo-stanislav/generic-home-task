@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.R
+import ua.com.dekalo.hometask.ui.AdapterUtils
 
 open class DetailsViewHolder(view: View) : RecyclerView.ViewHolder(view)
 class PostViewHolder(view: View) : DetailsViewHolder(view) {
@@ -79,20 +80,6 @@ class DetailsAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
     fun updateItems(newItems: List<DetailsItem>) {
         val oldItems = items
         items = newItems
-
-        //TODO DiffUtil move to helper class
-        DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-
-            override fun getOldListSize() = oldItems.size
-            override fun getNewListSize() = newItems.size
-
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == newItems[newItemPosition]
-            }
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItems[oldItemPosition] == newItems[newItemPosition]
-            }
-        }).dispatchUpdatesTo(this)
+        AdapterUtils.notifyChanges(this, oldItems, items)
     }
 }

@@ -1,0 +1,7 @@
+ext {
+    kotlin_version = '1.3.20'
+    dagger_version = "2.16"
+    okhttp_version = "3.13.1"
+    moshi_version = "1.8.0"
+    retrofit_2_version = "2.5.0"
+}

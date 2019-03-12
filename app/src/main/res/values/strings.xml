@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Home Task</string>
-    <string name="details_screen_unknown_title">Unknown</string>
     <string name="main_screen_comments_count">Comments: %d</string>
     <string name="main_screen_no_comments">No comments</string>
     <string name="failed_to_load_content">Failed to load content</string>

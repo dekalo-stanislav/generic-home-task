@@ -5,8 +5,11 @@ import io.reactivex.Observable
 import ua.com.dekalo.hometask.cache.CommentsCache
 import ua.com.dekalo.hometask.models.Comment
 import ua.com.dekalo.hometask.network.ServiceApi
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultCommentsRepository(
+@Singleton
+class DefaultCommentsRepository @Inject constructor(
     private val api: ServiceApi,
     private val commentsCache: CommentsCache
 ) : CommentsRepository {

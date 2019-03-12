@@ -7,16 +7,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.R
+import ua.com.dekalo.hometask.models.Country
+import ua.com.dekalo.hometask.models.CountryDetails
 import ua.com.dekalo.hometask.ui.utils.AdapterUtils
 
 open class DetailsViewHolder(view: View) : RecyclerView.ViewHolder(view)
-class PostViewHolder(view: View) : DetailsViewHolder(view) {
+
+class CountryPreviewViewHolder(view: View) : DetailsViewHolder(view) {
 
     companion object {
-        fun create(parent: ViewGroup): PostViewHolder {
-            return PostViewHolder(
+        fun create(parent: ViewGroup): CountryPreviewViewHolder {
+            return CountryPreviewViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.details_post_layout,
+                    R.layout.details_preview_item_layout,
                     parent,
                     false
                 )
@@ -24,19 +27,20 @@ class PostViewHolder(view: View) : DetailsViewHolder(view) {
         }
     }
 
-    fun bind(postDetailsItem: PostDetailsItem) {
-        itemView.findViewById<TextView>(R.id.post_title_text_view).text = postDetailsItem.post.title
-        itemView.findViewById<TextView>(R.id.post_author_text_view).text = postDetailsItem.post.author
+    fun bind(country: Country) {
+        itemView.findViewById<TextView>(R.id.details_preview_country_name).text = country.name
+        itemView.findViewById<TextView>(R.id.details_preview_local_country_name).text = country.nativeName
+        itemView.findViewById<TextView>(R.id.details_preview_population).text = country.population.toString()
     }
 }
 
-class CommentViewHolder(view: View) : DetailsViewHolder(view) {
+class CountryDetailsViewHolder(view: View) : DetailsViewHolder(view) {
 
     companion object {
-        fun create(parent: ViewGroup): CommentViewHolder {
-            return CommentViewHolder(
+        fun create(parent: ViewGroup): CountryDetailsViewHolder {
+            return CountryDetailsViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.details_comment_layout,
+                    R.layout.details_item_layout,
                     parent,
                     false
                 )
@@ -44,9 +48,10 @@ class CommentViewHolder(view: View) : DetailsViewHolder(view) {
         }
     }
 
-    fun bind(commentDetailsItem: CommentDetailsItem) {
-        itemView.findViewById<TextView>(R.id.comment_author_text_view).text = commentDetailsItem.comment.author
-        itemView.findViewById<TextView>(R.id.comment_content_text_view).text = commentDetailsItem.comment.content
+    fun bind(countryDetails: CountryDetails) {
+        itemView.findViewById<TextView>(R.id.details_country_name).text = countryDetails.name
+        itemView.findViewById<TextView>(R.id.details_local_country_name).text = countryDetails.nativeName
+        itemView.findViewById<TextView>(R.id.details_population).text = countryDetails.population.toString()
     }
 }
 
@@ -56,8 +61,8 @@ class DetailsAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
         return when (DetailsItem::class.sealedSubclasses[viewType]) {
-            PostDetailsItem::class -> PostViewHolder.create(parent)
-            CommentDetailsItem::class -> CommentViewHolder.create(parent)
+            CountryDetailsItem::class -> CountryDetailsViewHolder.create(parent)
+            CountryPreviewItem::class -> CountryPreviewViewHolder.create(parent)
             else -> throw IllegalStateException("Unknown viewType = $viewType")
         }
     }
@@ -70,8 +75,8 @@ class DetailsAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
         when (holder) {
-            is PostViewHolder -> holder.bind(items[position] as PostDetailsItem)
-            is CommentViewHolder -> holder.bind(items[position] as CommentDetailsItem)
+            is CountryDetailsViewHolder -> holder.bind((items[position] as CountryDetailsItem).details)
+            is CountryPreviewViewHolder -> holder.bind((items[position] as CountryPreviewItem).country)
             else -> Assertions.fail { IllegalStateException() }
         }
     }

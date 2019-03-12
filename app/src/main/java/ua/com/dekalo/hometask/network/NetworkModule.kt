@@ -37,7 +37,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providePostsApi(client: OkHttpClient): ServiceApi {
+    fun provideServiceApi(client: OkHttpClient): ServiceApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_ENDPOINT)
             .client(client)

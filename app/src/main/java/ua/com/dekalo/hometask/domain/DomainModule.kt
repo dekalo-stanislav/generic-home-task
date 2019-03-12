@@ -7,12 +7,12 @@ import dagger.Provides
 class DomainModule {
 
     @Provides
-    fun providesPostsRepository(defaultPostsRepository: DefaultPostsRepository): PostsRepository {
-        return defaultPostsRepository
+    fun providesCountryRepository(defaultCountriesRepository: DefaultCountriesRepository): CountriesRepository {
+        return defaultCountriesRepository
     }
 
     @Provides
-    fun providesCommentsRepository(defaultCommentsRepository: DefaultCommentsRepository): CommentsRepository {
-        return defaultCommentsRepository
+    fun providesDetailsRepository(defaultCountryDetailsRepository: DefaultCountryDetailsRepository): CountryDetailsRepository {
+        return defaultCountryDetailsRepository
     }
 }

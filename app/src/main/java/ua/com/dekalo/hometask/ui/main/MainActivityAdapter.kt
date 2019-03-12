@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.models.Country
 import ua.com.dekalo.hometask.ui.utils.AdapterUtils
 
 class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,26 +23,18 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
         }
     }
 
-    fun bind(post: Post, onClick: () -> Unit) {
-        itemView.findViewById<TextView>(R.id.post_title_text_view).text = post.title
-        itemView.findViewById<TextView>(R.id.post_author_text_view).text = post.author
-
-        if (post.commentsCount > 0) {
-            itemView.findViewById<TextView>(R.id.post_comments_count_text_view).text =
-                itemView.context.getString(R.string.main_screen_comments_count, post.commentsCount)
-            itemView.setOnClickListener { onClick() }
-        } else {
-            itemView.findViewById<TextView>(R.id.post_comments_count_text_view).text =
-                itemView.context.getString(R.string.main_screen_no_comments)
-            itemView.setOnClickListener(null)
-        }
+    fun bind(country: Country, onClick: () -> Unit) {
+        itemView.findViewById<TextView>(R.id.main_country_name).text = country.name
+        itemView.findViewById<TextView>(R.id.main_local_country_name).text = country.nativeName
+        itemView.findViewById<TextView>(R.id.main_population).text = country.population.toString()
+        itemView.setOnClickListener { onClick() }
     }
 }
 
-class MainActivityAdapter(private val onItemClick: (Int, Post, View) -> Unit) :
+class MainActivityAdapter(private val onItemClick: (Int, Country, View) -> Unit) :
     RecyclerView.Adapter<MainActivityAdapterItemViewHolder>() {
 
-    private var items = listOf<Post>()
+    private var items = listOf<Country>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainActivityAdapterItemViewHolder {
         return MainActivityAdapterItemViewHolder.create(parent)
@@ -54,7 +46,7 @@ class MainActivityAdapter(private val onItemClick: (Int, Post, View) -> Unit) :
         holder.bind(items.get(position)) { onItemClick(position, items[position], holder.itemView) }
     }
 
-    fun updateContent(newItems: List<Post>) {
+    fun updateContent(newItems: List<Country>) {
         val oldItems = items
         items = newItems
         AdapterUtils.notifyChanges(this, oldItems, items)

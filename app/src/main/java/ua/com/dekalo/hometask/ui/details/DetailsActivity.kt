@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.models.Country
 import ua.com.dekalo.hometask.ui.ViewModelFactory
 import ua.com.dekalo.hometask.ui.utils.AnimatedTransitionUtils
 import ua.com.dekalo.hometask.ui.utils.SnackHelper
@@ -23,14 +23,14 @@ import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
 
-    data class State(val post: Post) : Serializable
+    data class State(val country: Country) : Serializable
 
     companion object {
 
         private const val STATE_KEY = "details_activity_state"
 
-        fun create(context: Context, post: Post): Intent {
-            return Intent(context, DetailsActivity::class.java).putExtra(STATE_KEY, State(post))
+        fun create(context: Context, country: Country): Intent {
+            return Intent(context, DetailsActivity::class.java).putExtra(STATE_KEY, State(country))
         }
     }
 
@@ -63,7 +63,7 @@ class DetailsActivity : AppCompatActivity() {
 
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsActivityViewModel::class.java)
             viewModel.detailsData.observe(this) { onDataChanged(it) }
-            viewModel.init(it.post)
+            viewModel.init(it.country)
             viewModel.load()
 
             AnimatedTransitionUtils.setupForAnimatedTransition(this)

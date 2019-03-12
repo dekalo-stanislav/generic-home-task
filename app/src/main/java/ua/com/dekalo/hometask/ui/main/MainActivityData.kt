@@ -1,9 +1,9 @@
 package ua.com.dekalo.hometask.ui.main
 
-import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.models.Country
 
 data class MainActivityData(
-    val posts: List<Post> = emptyList(),
+    val countries: List<Country> = emptyList(),
     val isLoading: Boolean = false,
     val error: Throwable? = null
 )

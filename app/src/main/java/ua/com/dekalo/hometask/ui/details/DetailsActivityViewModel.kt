@@ -1,33 +1,23 @@
 package ua.com.dekalo.hometask.ui.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.heershingenmosiken.assertions.Assertions
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import ua.com.dekalo.hometask.domain.CommentsRepository
-import ua.com.dekalo.hometask.models.Comment
-import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.domain.CountryDetailsRepository
+import ua.com.dekalo.hometask.models.Country
+import ua.com.dekalo.hometask.models.CountryDetails
 import ua.com.dekalo.hometask.ui.utils.NonnullLiveData
 import ua.com.dekalo.hometask.ui.utils.NonnullMutableLiveData
 import javax.inject.Inject
 
 sealed class DetailsItem
-data class PostDetailsItem(val post: Post) : DetailsItem()
-data class CommentDetailsItem(val comment: Comment) : DetailsItem()
+data class CountryPreviewItem(val country: Country) : DetailsItem()
+data class CountryDetailsItem(val details: CountryDetails) : DetailsItem()
 
-open class DetailsActivityViewModel @Inject constructor(private val commentsRepository: CommentsRepository) :
+open class DetailsActivityViewModel @Inject constructor(private val countryDetailsRepository: CountryDetailsRepository) :
     ViewModel() {
-
-    companion object {
-        fun mergeContentToDetailsItem(post: Post?, comments: List<Comment> = emptyList()): List<DetailsItem> {
-            val items = mutableListOf<DetailsItem>()
-
-            post?.let { items.add(PostDetailsItem(it)) }
-            items.addAll(comments.map { CommentDetailsItem(it) })
-
-            return items
-        }
-    }
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -36,33 +26,34 @@ open class DetailsActivityViewModel @Inject constructor(private val commentsRepo
     private val _detailsData = NonnullMutableLiveData(_lastDetailsData)
     val detailsData: NonnullLiveData<DetailsActivityData> get() = _detailsData
 
-    private var post: Post? = null
-    private var comments = emptyList<Comment>()
+    private var country: Country? = null
+    private var countryDetails: CountryDetails? = null
 
-    fun init(post: Post) {
-        this.post = post
-        changeViewModelState { it.copy(items = mergeContentToDetailsItem(post)) }
+    fun init(country: Country) {
+        this.country = country
+        changeViewModelState { it.copy(items = listOf<DetailsItem>(CountryPreviewItem(country))) }
     }
 
     fun load(allowCache: Boolean = true) {
-        post?.let { post ->
+        country?.let { country ->
             compositeDisposable.add(
-                commentsRepository
-                    .load(CommentsRepository.createCommentsSpec(post.id, allowCache = allowCache))
+                countryDetailsRepository
+                    .load(CountryDetailsRepository.createCountryDetailSpec(country.name, allowCache = allowCache))
                     .doOnSubscribe { changeViewModelState { it.copy(isLoading = true) } }
                     .subscribeOn(Schedulers.io())
-                    .subscribe({ comments ->
-                        this.comments = comments
+                    .subscribe({ countryDetails ->
+                        this.countryDetails = countryDetails
                         changeViewModelState {
-                            it.copy(items = mergeContentToDetailsItem(post, comments), error = null)
+                            it.copy(items = listOf<DetailsItem>(CountryDetailsItem(countryDetails)), error = null)
                         }
                     }, { throwable ->
+                        Log.d("test111", "failedToLoadContent()", throwable)
                         changeViewModelState { it.copy(isLoading = false, error = throwable) }
                     }, {
                         changeViewModelState { it.copy(isLoading = false) }
                     })
             )
-        } ?: Assertions.fail { java.lang.IllegalStateException("Post is null") }
+        } ?: Assertions.fail { java.lang.IllegalStateException("Country is null") }
 
     }
 

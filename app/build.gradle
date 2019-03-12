@@ -15,7 +15,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_ENDPOINT", "\"http://my-json-server.typicode.com/dekalo-stanislav/generic-home-task/\""
+        buildConfigField "String", "API_ENDPOINT", "\"https://restcountries.eu/rest/v2/\""
         buildConfigField "boolean", "HTTP_LOGGING_ENABLED", "true"
     }
 

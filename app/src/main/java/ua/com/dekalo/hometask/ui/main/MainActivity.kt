@@ -14,7 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.models.Post
+import ua.com.dekalo.hometask.models.Country
 import ua.com.dekalo.hometask.ui.details.DetailsActivity
 import ua.com.dekalo.hometask.ui.utils.AnimatedTransitionUtils
 import ua.com.dekalo.hometask.ui.utils.SnackHelper
@@ -62,13 +62,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun onStateChanged(data: MainActivityData) {
 
-        adapter.updateContent(data.posts)
+        adapter.updateContent(data.countries)
 
         if (!data.isLoading) swipeRefreshLayout.isRefreshing = false
 
         if (data.error != null) {
             snackBar =
-                SnackHelper.showNetworkRetrySnackBar(swipeRefreshLayout, data.posts.isEmpty()) {
+                SnackHelper.showNetworkRetrySnackBar(swipeRefreshLayout, data.countries.isEmpty()) {
                     viewModel.loadData(false)
                 }
         } else {
@@ -76,22 +76,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onItemClick(post: Post, view: View) {
+    private fun onItemClick(country: Country, view: View) {
 
+        // TODO add flag
         val options = ActivityOptions.makeSceneTransitionAnimation(
             this,
             Pair.create(
-                view.findViewById(R.id.post_author_text_view),
+                view.findViewById(R.id.main_country_name),
                 getString(R.string.transition_main_details_author_name_tag)
             ),
             Pair.create(
-                view.findViewById(R.id.post_title_text_view),
+                view.findViewById(R.id.main_local_country_name),
                 getString(R.string.transition_main_details_post_title_tag)
             )
         )
 
         startActivity(
-            DetailsActivity.create(this, post),
+            DetailsActivity.create(this, country),
             options.toBundle()
         )
     }

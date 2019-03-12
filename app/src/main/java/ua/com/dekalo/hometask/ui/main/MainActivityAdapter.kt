@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
-import ua.com.dekalo.hometask.ui.AdapterUtils
+import ua.com.dekalo.hometask.ui.utils.AdapterUtils
 
 class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

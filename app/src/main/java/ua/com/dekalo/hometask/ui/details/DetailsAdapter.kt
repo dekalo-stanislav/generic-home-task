@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.ui.AdapterUtils
+import ua.com.dekalo.hometask.ui.utils.AdapterUtils
 
 open class DetailsViewHolder(view: View) : RecyclerView.ViewHolder(view)
 class PostViewHolder(view: View) : DetailsViewHolder(view) {

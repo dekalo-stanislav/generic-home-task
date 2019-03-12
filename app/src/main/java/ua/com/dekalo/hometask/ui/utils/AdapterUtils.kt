@@ -1,4 +1,4 @@
-package ua.com.dekalo.hometask.ui
+package ua.com.dekalo.hometask.ui.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

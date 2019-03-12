@@ -10,12 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
-import ua.com.dekalo.hometask.models.DataModel
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.details.DetailsActivity
+import ua.com.dekalo.hometask.ui.utils.SnackAction
+import ua.com.dekalo.hometask.ui.utils.SnackHelper
+import ua.com.dekalo.hometask.ui.utils.SnackLength
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +45,7 @@ class MainActivity : AppCompatActivity() {
         initUI()
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        viewModel.data.observe(this, Observer { onDataUpdated(it) })
-        viewModel.isLoading.observe(this, Observer { if (!it) swipeRefreshLayout.isRefreshing = false })
+        viewModel.state.observe(this, Observer { onStateChanged(it) })
         viewModel.loadData()
     }
 
@@ -56,16 +58,42 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener { viewModel.loadData(false) }
     }
 
-    private fun onDataUpdated(dataModel: DataModel) {
-        adapter.updateContent(dataModel.posts)
+    private fun onStateChanged(state: MainActivityState) {
+
+        adapter.updateContent(state.posts)
+
+        if (!state.isLoading) swipeRefreshLayout.isRefreshing = false
+
+        if (state.error != null) {
+            if (state.posts.isEmpty()) {
+                SnackHelper.show(
+                    swipeRefreshLayout,
+                    getString(R.string.failed_to_load_content),
+                    snackAction = SnackAction(getString(R.string.retry_snackbar_action)) { viewModel.loadData() }
+                )
+            } else {
+                SnackHelper.show(
+                    swipeRefreshLayout,
+                    getString(R.string.failed_to_refresh_content),
+                    snackLength = SnackLength.SHORT,
+                    snackAction = SnackAction(getString(R.string.retry_snackbar_action)) { viewModel.loadData() }
+                )
+            }
+        }
     }
 
     private fun onItemClick(post: Post, view: View) {
 
         val options = ActivityOptions.makeSceneTransitionAnimation(
             this,
-            Pair.create(view.findViewById(R.id.post_author_text_view), getString(R.string.transition_main_details_author_name_tag)),
-            Pair.create(view.findViewById(R.id.post_title_text_view), getString(R.string.transtion_main_details_post_title_tag))
+            Pair.create(
+                view.findViewById(R.id.post_author_text_view),
+                getString(R.string.transition_main_details_author_name_tag)
+            ),
+            Pair.create(
+                view.findViewById(R.id.post_title_text_view),
+                getString(R.string.transtion_main_details_post_title_tag)
+            )
         )
 
         startActivity(

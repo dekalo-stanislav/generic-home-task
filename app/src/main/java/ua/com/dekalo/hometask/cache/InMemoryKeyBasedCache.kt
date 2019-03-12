@@ -6,7 +6,8 @@ open class InMemoryKeyBasedCache<K, V> : KeyBasedCache<K, V> {
 
     private val hashMap = Hashtable<K, V>()
 
-    override fun isEmpty(key: K) = hashMap.contains(key)
+    override fun isEmpty(key: K) = !hashMap.containsKey(key)
+    override fun isEmpty() = hashMap.isEmpty
     override fun get(key: K) = hashMap[key]
 
     override fun put(key: K, value: V) {

@@ -17,9 +17,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:transitionName="@string/transtion_main_details_post_title_tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Title" />
+        tools:text="Title"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/post_author_text_view"
@@ -30,9 +32,11 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+        android:transitionName="@string/transition_main_details_author_name_tag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/post_title_text_view"
-        tools:text="Author" />
+        tools:text="Author"
+        tools:ignore="RtlHardcoded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

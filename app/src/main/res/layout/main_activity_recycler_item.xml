@@ -35,11 +35,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_title_text_view"
-            tools:text="Author" />
+            tools:text="Author"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/post_comments_count_text_view"
@@ -50,7 +51,8 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Comments" />
+            tools:text="Comments"
+            tools:ignore="RtlHardcoded" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

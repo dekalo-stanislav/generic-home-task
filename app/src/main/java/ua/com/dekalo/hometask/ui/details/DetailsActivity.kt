@@ -3,6 +3,7 @@ package ua.com.dekalo.hometask.ui.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -34,6 +35,7 @@ class DetailsActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: DetailsActivityViewModel
+    private lateinit var recyclerView: RecyclerView
     private lateinit var swipeToRefresh: SwipeRefreshLayout
 
     private var state: State? = null
@@ -59,11 +61,29 @@ class DetailsActivity : AppCompatActivity() {
             viewModel.detailsContent.observe(this, Observer { detailsAdapter.updateItems(it) })
             viewModel.isLoading.observe(this, Observer { if (!it) swipeToRefresh.isRefreshing = false })
             viewModel.init(it.post)
+
+            completeAnimatedActivityTransition()
+
         } ?: Assertions.fail { IllegalStateException("state == null") }
     }
 
+    private fun completeAnimatedActivityTransition() {
+        supportPostponeEnterTransition()
+        recyclerView.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    if (recyclerView.childCount > 1) {
+                        recyclerView.viewTreeObserver.removeOnPreDrawListener(this)
+                        supportStartPostponedEnterTransition()
+                    }
+                    return true
+                }
+            }
+        )
+    }
+
     private fun initUi() {
-        val recyclerView = findViewById<RecyclerView>(R.id.details_screen_recycler)
+        recyclerView = findViewById(R.id.details_screen_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = detailsAdapter
 

@@ -39,7 +39,7 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
     }
 }
 
-class MainActivityAdapter(private val onItemClick: (Int, Post) -> Unit) :
+class MainActivityAdapter(private val onItemClick: (Int, Post, View) -> Unit) :
     RecyclerView.Adapter<MainActivityAdapterItemViewHolder>() {
 
     private var items = listOf<Post>()
@@ -51,7 +51,7 @@ class MainActivityAdapter(private val onItemClick: (Int, Post) -> Unit) :
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: MainActivityAdapterItemViewHolder, position: Int) {
-        holder.bind(items.get(position)) { onItemClick(position, items[position]) }
+        holder.bind(items.get(position)) { onItemClick(position, items[position], holder.itemView) }
     }
 
     fun updateContent(newItems: List<Post>) {

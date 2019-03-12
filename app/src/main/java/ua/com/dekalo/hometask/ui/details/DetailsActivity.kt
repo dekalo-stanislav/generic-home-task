@@ -5,16 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import com.heershingenmosiken.assertions.Assertions
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.ViewModelFactory
+import ua.com.dekalo.hometask.ui.utils.SnackHelper
 import java.io.Serializable
 import javax.inject.Inject
 
@@ -37,6 +38,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailsActivityViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeToRefresh: SwipeRefreshLayout
+    private var snackBar: Snackbar? = null
 
     private var state: State? = null
     private val detailsAdapter = DetailsAdapter()
@@ -58,13 +60,28 @@ class DetailsActivity : AppCompatActivity() {
             initUi()
 
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsActivityViewModel::class.java)
-            viewModel.detailsContent.observe(this, Observer { detailsAdapter.updateItems(it) })
-            viewModel.isLoading.observe(this, Observer { if (!it) swipeToRefresh.isRefreshing = false })
+            viewModel.detailsData.observe(this) { onDataChanged(it) }
             viewModel.init(it.post)
+            viewModel.load()
 
             completeAnimatedActivityTransition()
 
-        } ?: Assertions.fail { IllegalStateException("state == null") }
+        } ?: Assertions.fail { IllegalStateException("data == null") }
+    }
+
+    private fun onDataChanged(data: DetailsActivityData) {
+
+        detailsAdapter.updateItems(data.items)
+
+        if (!data.isLoading) swipeToRefresh.isRefreshing = false
+
+        if (data.error != null) {
+            snackBar = SnackHelper.showNetworkRetrySnackBar(swipeToRefresh, data.items.size <= 1) {
+                viewModel.load(false)
+            }
+        } else {
+            snackBar?.dismiss()
+        }
     }
 
     private fun completeAnimatedActivityTransition() {
@@ -72,7 +89,7 @@ class DetailsActivity : AppCompatActivity() {
         recyclerView.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
-                    if (recyclerView.childCount > 1) {
+                    if (recyclerView.childCount > 0) {
                         recyclerView.viewTreeObserver.removeOnPreDrawListener(this)
                         supportStartPostponedEnterTransition()
                     }

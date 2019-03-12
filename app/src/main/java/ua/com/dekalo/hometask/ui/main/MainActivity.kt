@@ -10,15 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.details.DetailsActivity
-import ua.com.dekalo.hometask.ui.utils.SnackAction
 import ua.com.dekalo.hometask.ui.utils.SnackHelper
-import ua.com.dekalo.hometask.ui.utils.SnackLength
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private var snackBar: Snackbar? = null
 
     private val adapter = MainActivityAdapter { _, item, view -> onItemClick(item, view) }
 
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         initUI()
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
-        viewModel.state.observe(this, Observer { onStateChanged(it) })
+        viewModel.data.observe(this, Observer { onStateChanged(it) })
         viewModel.loadData()
     }
 
@@ -58,27 +57,19 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener { viewModel.loadData(false) }
     }
 
-    private fun onStateChanged(state: MainActivityState) {
+    private fun onStateChanged(data: MainActivityData) {
 
-        adapter.updateContent(state.posts)
+        adapter.updateContent(data.posts)
 
-        if (!state.isLoading) swipeRefreshLayout.isRefreshing = false
+        if (!data.isLoading) swipeRefreshLayout.isRefreshing = false
 
-        if (state.error != null) {
-            if (state.posts.isEmpty()) {
-                SnackHelper.show(
-                    swipeRefreshLayout,
-                    getString(R.string.failed_to_load_content),
-                    snackAction = SnackAction(getString(R.string.retry_snackbar_action)) { viewModel.loadData() }
-                )
-            } else {
-                SnackHelper.show(
-                    swipeRefreshLayout,
-                    getString(R.string.failed_to_refresh_content),
-                    snackLength = SnackLength.SHORT,
-                    snackAction = SnackAction(getString(R.string.retry_snackbar_action)) { viewModel.loadData() }
-                )
-            }
+        if (data.error != null) {
+            snackBar =
+                SnackHelper.showNetworkRetrySnackBar(swipeRefreshLayout, data.posts.isEmpty()) {
+                    viewModel.loadData(false)
+                }
+        } else {
+            snackBar?.dismiss()
         }
     }
 

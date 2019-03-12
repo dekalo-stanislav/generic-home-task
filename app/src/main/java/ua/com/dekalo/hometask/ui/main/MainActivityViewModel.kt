@@ -13,22 +13,22 @@ class MainActivityViewModel @Inject constructor(private val postsRepository: Pos
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val _state = NonnullMutableLiveData<MainActivityState>(MainActivityState())
-    val state: LiveData<MainActivityState> get() = _state
+    private val _mainData = NonnullMutableLiveData(MainActivityData())
+    val data: LiveData<MainActivityData> get() = _mainData
 
     fun loadData(allowCache: Boolean = true) {
         compositeDisposable.add(
             postsRepository.load(GenericRepository.createGenericSpec(allowCache = allowCache))
-                .doOnSubscribe { changeState { it.copy(isLoading = true, error = null) } }
+                .doOnSubscribe { changeViewModelState { it.copy(isLoading = true, error = null) } }
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                    { posts -> changeState { it.copy(posts = posts, isLoading = false, error = null) } },
-                    { exception -> changeState { it.copy(error = exception, isLoading = false) } })
+                    { posts -> changeViewModelState { it.copy(posts = posts, isLoading = false, error = null) } },
+                    { exception -> changeViewModelState { it.copy(error = exception, isLoading = false) } })
         )
     }
 
-    private fun changeState(change: (MainActivityState) -> MainActivityState) {
-        _state.postValue(change.invoke(_state.value))
+    private fun changeViewModelState(change: (MainActivityData) -> MainActivityData) {
+        _mainData.postValue(change.invoke(_mainData.value))
     }
 
     override fun onCleared() {

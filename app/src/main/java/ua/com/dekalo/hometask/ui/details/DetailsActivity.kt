@@ -15,9 +15,11 @@ import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.ViewModelFactory
+import ua.com.dekalo.hometask.ui.utils.AnimatedTransitionUtils
 import ua.com.dekalo.hometask.ui.utils.SnackHelper
 import java.io.Serializable
 import javax.inject.Inject
+
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -64,6 +66,7 @@ class DetailsActivity : AppCompatActivity() {
             viewModel.init(it.post)
             viewModel.load()
 
+            AnimatedTransitionUtils.setupForAnimatedTransition(this)
             completeAnimatedActivityTransition()
 
         } ?: Assertions.fail { IllegalStateException("data == null") }

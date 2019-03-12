@@ -16,6 +16,7 @@ import ua.com.dekalo.hometask.HomeTaskApplication
 import ua.com.dekalo.hometask.R
 import ua.com.dekalo.hometask.models.Post
 import ua.com.dekalo.hometask.ui.details.DetailsActivity
+import ua.com.dekalo.hometask.ui.utils.AnimatedTransitionUtils
 import ua.com.dekalo.hometask.ui.utils.SnackHelper
 import javax.inject.Inject
 
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        AnimatedTransitionUtils.setupForAnimatedTransition(this)
 
         initUI()
 
@@ -83,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             ),
             Pair.create(
                 view.findViewById(R.id.post_title_text_view),
-                getString(R.string.transtion_main_details_post_title_tag)
+                getString(R.string.transition_main_details_post_title_tag)
             )
         )
 

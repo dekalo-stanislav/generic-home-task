@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:background="@color/cardview_light_background"
+    android:background="@color/white"
     android:elevation="4dp"
     tools:targetApi="lollipop">
 
@@ -17,11 +17,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:transitionName="@string/transtion_main_details_post_title_tag"
+        android:transitionName="@string/transition_main_details_post_title_tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Title"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        tools:text="Title" />
 
     <TextView
         android:id="@+id/post_author_text_view"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/post_title_text_view"
-        tools:text="Author"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        tools:text="Author" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

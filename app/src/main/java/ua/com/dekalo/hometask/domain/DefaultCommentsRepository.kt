@@ -5,7 +5,6 @@ import io.reactivex.Observable
 import ua.com.dekalo.hometask.cache.CommentsCache
 import ua.com.dekalo.hometask.models.Comment
 import ua.com.dekalo.hometask.network.ServiceApi
-import java.util.concurrent.TimeUnit
 
 class DefaultCommentsRepository(
     private val api: ServiceApi,

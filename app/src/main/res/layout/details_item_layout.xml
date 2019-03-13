@@ -5,60 +5,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp">
+    android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/details_item_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/details_flag_view"
+        <TextView
+            android:id="@+id/details_capital_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars[0]" />
+            tools:text="Capital" />
 
         <TextView
-            android:id="@+id/details_country_name"
+            android:id="@+id/details_region_subregion_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/details_flag_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Country name" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_capital_text_view"
+            tools:text="Region, Subreagion" />
 
         <TextView
-            android:id="@+id/details_local_country_name"
+            android:id="@+id/details_area_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_region_subregion_text_view"
+            tools:text="Area" />
+
+        <TextView
+            android:id="@+id/details_currencies_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/details_country_name"
-            app:layout_constraintTop_toBottomOf="@+id/details_country_name"
-            tools:text="Country local name" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_area_text_view"
+            tools:text="Currencies" />
 
         <TextView
-            android:id="@+id/details_population"
+            android:id="@+id/details_gini_index_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_currencies_text_view"
+            tools:text="Gini" />
+
+        <TextView
+            android:id="@+id/details_languages_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/details_local_country_name"
-            app:layout_constraintTop_toBottomOf="@+id/details_local_country_name"
-            tools:text="Population" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_gini_index_text_view"
+            tools:text="Languages, Languages, Languages, Languages, Languages, Languages, Languages, Languages, Languages, Languages, Languages, Languages" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

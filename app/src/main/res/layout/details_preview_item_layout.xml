@@ -5,21 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp">
+    android:layout_margin="8dp"
+    android:transitionName="@string/transition_main_details_background_tag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/details_preview_item_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/details_preview_flag_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/flag_with_in_recycler_view"
+            android:layout_height="@dimen/flag_height_in_recycler_view"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/country_flag_content_description"
+            android:scaleType="centerInside"
+            android:transitionName="@string/transition_main_details_flag_tag"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,21 +35,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:transitionName="@string/transition_main_details_name_tag"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/details_preview_flag_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Country name" />
-
-        <TextView
-            android:id="@+id/details_preview_local_country_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/details_preview_country_name"
-            app:layout_constraintTop_toBottomOf="@+id/details_preview_country_name"
-            tools:text="Country local name" />
 
         <TextView
             android:id="@+id/details_preview_population"
@@ -54,9 +47,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:transitionName="@string/transition_main_details_population_tag"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/details_preview_local_country_name"
-            app:layout_constraintTop_toBottomOf="@+id/details_preview_local_country_name"
+            app:layout_constraintStart_toStartOf="@+id/details_preview_country_name"
+            app:layout_constraintTop_toBottomOf="@+id/details_preview_country_name"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Population" />
 
 

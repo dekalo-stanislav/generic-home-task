@@ -3,5 +3,7 @@ ext {
     dagger_version = "2.16"
     okhttp_version = "3.13.1"
     moshi_version = "1.8.0"
+    glide_version = "4.9.0"
     retrofit_2_version = "2.5.0"
+
 }

@@ -1,6 +1,5 @@
 package ua.com.dekalo.hometask.ui.details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.heershingenmosiken.assertions.Assertions
 import io.reactivex.disposables.CompositeDisposable
@@ -44,10 +43,9 @@ open class DetailsActivityViewModel @Inject constructor(private val countryDetai
                     .subscribe({ countryDetails ->
                         this.countryDetails = countryDetails
                         changeViewModelState {
-                            it.copy(items = listOf<DetailsItem>(CountryDetailsItem(countryDetails)), error = null)
+                            it.copy(items = listOf(CountryPreviewItem(country), CountryDetailsItem(countryDetails)), error = null)
                         }
                     }, { throwable ->
-                        Log.d("test111", "failedToLoadContent()", throwable)
                         changeViewModelState { it.copy(isLoading = false, error = throwable) }
                     }, {
                         changeViewModelState { it.copy(isLoading = false) }

@@ -78,16 +78,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun onItemClick(country: Country, view: View) {
 
-        // TODO add flag
         val options = ActivityOptions.makeSceneTransitionAnimation(
             this,
             Pair.create(
-                view.findViewById(R.id.main_country_name),
-                getString(R.string.transition_main_details_author_name_tag)
+                view.findViewById(R.id.main_card_view),
+                getString(R.string.transition_main_details_background_tag)
             ),
             Pair.create(
-                view.findViewById(R.id.main_local_country_name),
-                getString(R.string.transition_main_details_post_title_tag)
+                view.findViewById(R.id.main_country_name),
+                getString(R.string.transition_main_details_name_tag)
+            ),
+            Pair.create(
+                view.findViewById(R.id.main_population),
+                getString(R.string.transition_main_details_population_tag)
+            ),
+            Pair.create(
+                view.findViewById(R.id.main_flag_view),
+                getString(R.string.transition_main_details_flag_tag)
             )
         )
 

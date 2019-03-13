@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="flag_with_in_recycler_view">120dp</dimen>
+    <dimen name="flag_height_in_recycler_view">72dp</dimen>
+</resources>

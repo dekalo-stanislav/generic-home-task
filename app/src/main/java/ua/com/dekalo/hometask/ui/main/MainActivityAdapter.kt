@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ua.com.dekalo.hometask.R
+import ua.com.dekalo.hometask.domain.CountriesUtils
 import ua.com.dekalo.hometask.models.Country
 import ua.com.dekalo.hometask.ui.utils.AdapterUtils
+import ua.com.dekalo.hometask.ui.utils.svg.GlideSvg
+
 
 class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -24,9 +27,17 @@ class MainActivityAdapterItemViewHolder(view: View) : RecyclerView.ViewHolder(vi
     }
 
     fun bind(country: Country, onClick: () -> Unit) {
-        itemView.findViewById<TextView>(R.id.main_country_name).text = country.name
-        itemView.findViewById<TextView>(R.id.main_local_country_name).text = country.nativeName
-        itemView.findViewById<TextView>(R.id.main_population).text = country.population.toString()
+
+        GlideSvg.with(itemView.context)
+            .load(country.flag)
+            .into(itemView.findViewById(R.id.main_flag_view))
+
+        itemView.findViewById<TextView>(R.id.main_country_name).text =
+            CountriesUtils.displayName(country.name, country.nativeName)
+
+        itemView.findViewById<TextView>(R.id.main_population).text =
+            CountriesUtils.humanReadablePopulation(country.population)
+
         itemView.setOnClickListener { onClick() }
     }
 }

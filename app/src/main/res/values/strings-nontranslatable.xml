@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="transition_main_details_author_name_tag" translatable="false">author_name_transition_tag</string>
-    <string name="transition_main_details_post_title_tag" translatable="false">post_title_transition_tag</string>
+    <string name="transition_main_details_name_tag" translatable="false">name_transition_tag</string>
+    <string name="transition_main_details_population_tag" translatable="false">population_transition_tag</string>
+    <string name="transition_main_details_flag_tag" translatable="false">flag_transition_tag</string>
+    <string name="transition_main_details_background_tag" translatable="false">name_transition_background</string>
 </resources>

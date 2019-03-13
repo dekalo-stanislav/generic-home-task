@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Home Task</string>
-    <string name="main_screen_comments_count">Comments: %d</string>
-    <string name="main_screen_no_comments">No comments</string>
     <string name="failed_to_load_content">Failed to load content</string>
     <string name="failed_to_refresh_content">Failed to refresh content</string>
     <string name="retry_snackbar_action">Retry</string>
+    <string name="country_capital_details_string">Capital: %s</string>
+    <string name="country_region_subregion_details_string">%s, %s</string>
+    <string name="currecncies_details_string">Currencies: %s</string>
+    <string name="gini_index_details_string">Gini index: %.1f</string>
+    <string name="languages_details_string">Languages: %s</string>
+    <string name="area_details_text_view">Area: %s km² </string>
+    <string name="country_flag_content_description">Country flag</string>
 </resources>
